@@ -1,0 +1,14 @@
+{
+  "name": "gemini-api-test",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "demo": "node demo.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "dotenv": "^16.4.7",
+    "zod": "^4.4.3"
+  }
+}
