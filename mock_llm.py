@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 """Offline mock LLM with keyword-based tool selection."""
+=======
+"""
+Step 3a: Mock LLM — how the model "decides" which tool to call
+--------------------------------------------------------------
+Keyword rules so you can READ the decision logic without an API key.
+Use: python main.py --mock
+"""
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
 
 from __future__ import annotations
 
@@ -32,6 +41,7 @@ def _decide(user_message: str, observations: List[str]) -> LLMResponse:
     msg = user_message.lower()
 
     if observations:
+<<<<<<< HEAD
         return FinalAnswer(
             text=_summarize(user_message, observations),
             thought="I have tool results. Answering now.",
@@ -57,10 +67,65 @@ def _decide(user_message: str, observations: List[str]) -> LLMResponse:
     return FinalAnswer(
         text="Try: 'weather in Tokyo', 'list my tasks', 'add task: buy milk', 'delete task 1'.",
         thought=thought,
+=======
+        thought = "I have tool results. I can answer the user now."
+        return FinalAnswer(text=_summarize_observations(user_message, observations), thought=thought)
+
+    thought = _explain_decision(msg)
+
+    if any(w in msg for w in ("weather", "temperature", "forecast", "rain", "sunny")):
+        city = _extract_city(msg) or "London"
+        return ToolCall(
+            name="get_forecast",
+            arguments={"city": city},
+            thought=f"{thought} User wants weather -> calling get_forecast(city='{city}').",
+        )
+
+    if any(w in msg for w in ("list", "show", "what are", "my tasks", "todo")):
+        if "task" in msg or "todo" in msg:
+            return ToolCall(
+                name="list_tasks",
+                arguments={},
+                thought=f"{thought} User wants to see tasks -> calling list_tasks().",
+            )
+
+    create_match = re.search(r"(?:add|create|new)\s+(?:task|todo)[:\s]+(.+)", msg)
+    if create_match:
+        title = create_match.group(1).strip().title()
+        return ToolCall(
+            name="create_task",
+            arguments={"title": title},
+            thought=f"{thought} User wants to add a task -> calling create_task(title='{title}').",
+        )
+
+    delete_match = re.search(r"(?:delete|remove)\s+task\s+(\d+)", msg)
+    if delete_match:
+        task_id = int(delete_match.group(1))
+        return ToolCall(
+            name="delete_task",
+            arguments={"task_id": task_id},
+            thought=f"{thought} User wants to delete -> calling delete_task(task_id={task_id}).",
+        )
+
+    return FinalAnswer(
+        text=(
+            "I can help with weather (try 'weather in Tokyo') or tasks "
+            "('list my tasks', 'add task: buy milk', 'delete task 1')."
+        ),
+        thought=f"{thought} No matching tool - answering from general knowledge.",
+    )
+
+
+def _explain_decision(msg: str) -> str:
+    return (
+        "REASON: I read the user message and compare it to each tool's description. "
+        f"Message keywords: {msg[:60]}..."
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
     )
 
 
 def _extract_city(msg: str) -> str | None:
+<<<<<<< HEAD
     for city in ("london", "tokyo", "new york", "paris"):
         if city in msg:
             return city.title()
@@ -72,3 +137,19 @@ def _summarize(user_message: str, observations: List[str]) -> str:
     lines = [f"Answer for '{user_message}':"]
     lines.extend(f"  - {o}" for o in observations)
     return "\n".join(lines)
+=======
+    match = re.search(r"(?:in|for|at)\s+([a-z\s]+?)(?:\?|$|,|\.)", msg)
+    if match:
+        return match.group(1).strip().title()
+    for city in ("london", "tokyo", "new york", "paris"):
+        if city in msg:
+            return city.title()
+    return None
+
+
+def _summarize_observations(user_message: str, observations: List[str]) -> str:
+    parts = [f"Based on your question ('{user_message}'):"]
+    for obs in observations:
+        parts.append(f"  - {obs}")
+    return "\n".join(parts)
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f

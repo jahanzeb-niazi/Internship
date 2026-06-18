@@ -1,14 +1,32 @@
 """
+<<<<<<< HEAD
 Tool registry and safe execution with graceful error handling.
+=======
+Step 2: Tools (what the agent CAN do)
+-------------------------------------
+Each tool has:
+  - name: what the LLM calls
+  - description: helps the LLM decide WHEN to use it
+  - parameters: JSON-schema-like shape
+  - requires_approval: human-in-the-loop gate for risky actions
+  - handler: the actual function that runs
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
 """
 
 from __future__ import annotations
 
+<<<<<<< HEAD
 import traceback
 from dataclasses import dataclass
 from typing import Callable, Dict, List, Optional
 
 from llm_types import ToolResult
+=======
+import json
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, List, Optional
+
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
 from mock_apis import TASK_STORE, fetch_weather
 
 
@@ -37,6 +55,10 @@ def _delete_task(task_id: int) -> dict:
     return TASK_STORE.delete_task(task_id)
 
 
+<<<<<<< HEAD
+=======
+# Registry: all tools the agent may call
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
 TOOLS: Dict[str, Tool] = {
     "get_forecast": Tool(
         name="get_forecast",
@@ -64,7 +86,11 @@ TOOLS: Dict[str, Tool] = {
             "properties": {"title": {"type": "string", "description": "Task title"}},
             "required": ["title"],
         },
+<<<<<<< HEAD
         requires_approval=True,
+=======
+        requires_approval=True,  # writes need human approval
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
         handler=_create_task,
     ),
     "delete_task": Tool(
@@ -75,19 +101,38 @@ TOOLS: Dict[str, Tool] = {
             "properties": {"task_id": {"type": "integer", "description": "Task ID to delete"}},
             "required": ["task_id"],
         },
+<<<<<<< HEAD
         requires_approval=True,
+=======
+        requires_approval=True,  # destructive → approval gate
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
         handler=_delete_task,
     ),
 }
 
 
+<<<<<<< HEAD
 def tools_for_gemini() -> List[dict]:
     return [
         {"name": t.name, "description": t.description, "parameters": t.parameters}
+=======
+def tools_for_llm() -> List[dict]:
+    """OpenAI-style tool format (for reference / other providers)."""
+    return [
+        {
+            "type": "function",
+            "function": {
+                "name": t.name,
+                "description": t.description,
+                "parameters": t.parameters,
+            },
+        }
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
         for t in TOOLS.values()
     ]
 
 
+<<<<<<< HEAD
 def run_tool(name: str, arguments: Optional[dict] = None) -> ToolResult:
     """
     Execute a tool safely. Never raises — returns ToolResult with ok=True/False.
@@ -110,6 +155,30 @@ def run_tool(name: str, arguments: Optional[dict] = None) -> ToolResult:
             f"Tool '{name}' failed: {e}",
             data={"error": str(e), "traceback": traceback.format_exc(limit=2)},
         )
+=======
+def tools_for_gemini() -> List[dict]:
+    """Gemini function_declarations format (OpenAPI subset)."""
+    return [
+        {
+            "name": t.name,
+            "description": t.description,
+            "parameters": t.parameters,
+        }
+        for t in TOOLS.values()
+    ]
+
+
+def run_tool(name: str, arguments: Optional[dict] = None) -> dict:
+    """Execute a tool by name with given arguments."""
+    if name not in TOOLS:
+        return {"error": f"Unknown tool: {name}"}
+    tool = TOOLS[name]
+    args = arguments or {}
+    try:
+        return tool.handler(**args)
+    except TypeError as e:
+        return {"error": f"Bad arguments for {name}: {e}"}
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
 
 
 def pretty_tool_list() -> str:

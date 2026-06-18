@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 .env
 action_log.jsonl
+=======
+# Secrets - never commit your real key
+.env
+
+# Python
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
 __pycache__/
 *.py[cod]
 .venv/

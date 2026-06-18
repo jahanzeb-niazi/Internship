@@ -9,6 +9,10 @@ from pathlib import Path
 def load_env() -> None:
     try:
         from dotenv import load_dotenv
+<<<<<<< HEAD
+=======
+
+>>>>>>> a110e738aaea2cef40a2e542d86a997a0e80769f
         load_dotenv(Path(__file__).parent / ".env")
     except ImportError:
         pass
