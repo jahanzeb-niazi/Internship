@@ -1,0 +1,238 @@
+{
+  "timestamp": "2026-06-23T12:51:12.434745",
+  "prompt_version_tag": "v1.0",
+  "prompt_versions": {
+    "parse_application": "v1.0",
+    "qualify_candidate": "v1.0",
+    "draft_outreach": "v1.0",
+    "agent_reasoning": "v1.0"
+  },
+  "total_cases": 17,
+  "errors": 0,
+  "overall_accuracy": 82.4,
+  "profile_accuracy": 100.0,
+  "average_confidence": 0.853,
+  "by_difficulty": {
+    "easy": {
+      "total": 7,
+      "correct": 7,
+      "accuracy": 100.0
+    },
+    "medium": {
+      "total": 5,
+      "correct": 3,
+      "accuracy": 60.0
+    },
+    "hard": {
+      "total": 5,
+      "correct": 4,
+      "accuracy": 80.0
+    }
+  },
+  "results": [
+    {
+      "id": "TC001",
+      "description": "Strong backend candidate (Ayesha example from brief)",
+      "difficulty": "easy",
+      "expected_decision": "qualified",
+      "actual_decision": "needs_human_review",
+      "confidence": 0.6,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 3.31
+    },
+    {
+      "id": "TC002",
+      "description": "Junior candidate with insufficient experience",
+      "difficulty": "easy",
+      "expected_decision": "not_qualified",
+      "actual_decision": "not_qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.0
+    },
+    {
+      "id": "TC003",
+      "description": "Strong frontend candidate",
+      "difficulty": "easy",
+      "expected_decision": "qualified",
+      "actual_decision": "qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.19
+    },
+    {
+      "id": "TC004",
+      "description": "Data engineer with relevant experience",
+      "difficulty": "easy",
+      "expected_decision": "qualified",
+      "actual_decision": "qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.15
+    },
+    {
+      "id": "TC005",
+      "description": "Completely unqualified - no tech background",
+      "difficulty": "easy",
+      "expected_decision": "not_qualified",
+      "actual_decision": "not_qualified",
+      "confidence": 1.0,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.21
+    },
+    {
+      "id": "TC006",
+      "description": "Borderline candidate - some skills but gaps",
+      "difficulty": "medium",
+      "expected_decision": "needs_human_review",
+      "actual_decision": "not_qualified",
+      "confidence": 0.9,
+      "profile_correct": true,
+      "decision_correct": false,
+      "error": null,
+      "latency_s": 2.09
+    },
+    {
+      "id": "TC007",
+      "description": "Overqualified candidate - senior level",
+      "difficulty": "medium",
+      "expected_decision": "qualified",
+      "actual_decision": "qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.11
+    },
+    {
+      "id": "TC008",
+      "description": "Vague application - missing details",
+      "difficulty": "hard",
+      "expected_decision": "needs_human_review",
+      "actual_decision": "not_qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": false,
+      "error": null,
+      "latency_s": 1.95
+    },
+    {
+      "id": "TC009",
+      "description": "Frontend candidate applying for wrong role",
+      "difficulty": "medium",
+      "expected_decision": "not_qualified",
+      "actual_decision": "not_qualified",
+      "confidence": 0.9,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 32.47
+    },
+    {
+      "id": "TC010",
+      "description": "Career changer with bootcamp background",
+      "difficulty": "medium",
+      "expected_decision": "needs_human_review",
+      "actual_decision": "not_qualified",
+      "confidence": 0.9,
+      "profile_correct": true,
+      "decision_correct": false,
+      "error": null,
+      "latency_s": 2.13
+    },
+    {
+      "id": "TC011",
+      "description": "Strong candidate with AI/ML skills",
+      "difficulty": "easy",
+      "expected_decision": "qualified",
+      "actual_decision": "qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.04
+    },
+    {
+      "id": "TC012",
+      "description": "Candidate with unrelated experience claiming skills",
+      "difficulty": "hard",
+      "expected_decision": "not_qualified",
+      "actual_decision": "not_qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.16
+    },
+    {
+      "id": "TC013",
+      "description": "Strong data engineer candidate",
+      "difficulty": "easy",
+      "expected_decision": "qualified",
+      "actual_decision": "qualified",
+      "confidence": 0.95,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.13
+    },
+    {
+      "id": "TC014",
+      "description": "Ambiguous experience level",
+      "difficulty": "hard",
+      "expected_decision": "needs_human_review",
+      "actual_decision": "needs_human_review",
+      "confidence": 0.6,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.64
+    },
+    {
+      "id": "TC015",
+      "description": "Multilingual application with strong credentials",
+      "difficulty": "medium",
+      "expected_decision": "qualified",
+      "actual_decision": "qualified",
+      "confidence": 0.9,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 2.57
+    },
+    {
+      "id": "TC016",
+      "description": "Candidate with impressive skills but no clear role match",
+      "difficulty": "hard",
+      "expected_decision": "needs_human_review",
+      "actual_decision": "needs_human_review",
+      "confidence": 0.6,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 32.64
+    },
+    {
+      "id": "TC017",
+      "description": "Extremely minimal application",
+      "difficulty": "hard",
+      "expected_decision": "needs_human_review",
+      "actual_decision": "needs_human_review",
+      "confidence": 0.5,
+      "profile_correct": true,
+      "decision_correct": true,
+      "error": null,
+      "latency_s": 32.32
+    }
+  ]
+}
