@@ -11,7 +11,8 @@ langchain-google-genai>=2.0.0
 langchain>=0.3.0
 langchain-community>=0.3.0
 langchain-text-splitters>=0.3.0
-
+langchain-experimental
+langchain-text-splitters
 # --- Vector Store ---
 langchain-chroma>=0.2.0
 chromadb>=0.5.0
